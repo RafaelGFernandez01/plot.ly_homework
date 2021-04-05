@@ -3,7 +3,12 @@
 // ## Step 1: Plotly
 
 // 1. Use the D3 library to read in `samples.json`.
-d3.json("data/samples.json").then()
+// d3.json("data/samples.json").then()
+
+
+d3.json("data/samples.json", function(error, data) {
+    console.log(data); // this is your data
+});
     
 console.log(importedData);
     
