@@ -12,12 +12,22 @@
 // function buildMetadata(samplenumber){
 //     var sampledata = d3.json("../../samples.json").then(function(data) {
 //         sampledata = data.metadata.filter(data => data.id == samplenumber),
-    
+
+
+// Homework Review 4/21/2021   
+
 function builtMetadata(sampleNumber){
 d3.json("./samples.json").then((data) => {
    metadata = data.metadata;
    metadata = filter(metadata => metadata.id == sampleNumber)
-    
+   var_metadata_obj = d3.select("#sample-metadata");
+   
+   Object.entries(sample).forEach({key, value}) => {
+        metadata_object.append("h6")
+
+   }
+
+   console.log(sample)
 })
 
 
