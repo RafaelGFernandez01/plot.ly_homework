@@ -5,10 +5,23 @@
 // 1. Use the D3 library to read in `samples.json`.
 // d3.json("data/samples.json").then()
 
-d3.json("/static/data/samples.json", function(data) {
-    console.log(data);
-});
+// d3.json("/static/data/samples.json", function(data) {
+//     console.log(data);
+// });
+
+// function buildMetadata(samplenumber){
+//     var sampledata = d3.json("../../samples.json").then(function(data) {
+//         sampledata = data.metadata.filter(data => data.id == samplenumber),
     
+function builtMetadata(sampleNumber){
+d3.json("./samples.json").then((data) => {
+   metadata = data.metadata;
+   metadata = filter(metadata => metadata.id == sampleNumber)
+    
+})
+
+
+
 // console.log(importedData);
     
 
