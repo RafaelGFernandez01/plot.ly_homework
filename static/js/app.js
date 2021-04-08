@@ -21,14 +21,41 @@ d3.json("./samples.json").then((data) => {
    metadata = data.metadata;
    metadata = filter(metadata => metadata.id == sampleNumber)
    var_metadata_obj = d3.select("#sample-metadata");
-   
+   metadata_object.html("")
    Object.entries(sample).forEach({key, value}) => {
-        metadata_object.append("h6")
-
-   }
-
-   console.log(sample)
+        metadata_object.append("h6").text(`${key.toUpperCase}: ${value}`
+        
+   })
+          
 })
+
+// 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
+
+// * Use `sample_values` as the values for the bar chart.
+
+// * Use `otu_ids` as the labels for the bar chart.
+
+// * Use `otu_labels` as the hovertext for the chart.
+
+//   ![bar Chart](Images/hw01.png)
+function buildCharts(sampleNumber){
+    d3.json("samples.json").then((data) => {
+    samples = data.samples;
+    var sample = samples[0]
+    var otu_ids = sample.otu_ids
+    var otu_labels = sample.otu_labels
+    var sample_values = sample.sample_values
+
+
+
+
+    }
+
+
+
+
+
+}
 
 
 
