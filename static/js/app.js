@@ -42,16 +42,19 @@ function fillSelect(data) {
     });
 }
 
-function buildMetadata(sampleNumber){
-    d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json")
-        .then((data) =>{
-            let metadata = data.metadata;    
-            metadata = metadata.filter(m => m.id == sampleNumber);
-            let metadata_obj = d3.select("#sample-metadata");
-            metadata_obj.html("")
+function optionChanged(value){
+    console.log(value);  
+    buildMetadata(value);
+}
 
-            console.log('data', data);
-        });
+
+function buildMetadata(data, sampleNumber){
+    let metadata = data.metadata;    
+    metadata = metadata.filter(m => m.id == sampleNumber);
+    let metadata_obj = d3.select("#sample-metadata");
+    metadata_obj.html("")
+
+    console.log('data', data);
 
 }
 // buildMetadata();
