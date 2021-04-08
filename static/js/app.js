@@ -31,7 +31,15 @@
 
 
 
+function fillSelect(data) {
+    const names = data.names;
+    const selectObject = d3.select("#selDataset");
+    console.log(names,selectObject);
 
+    names.forEach((name) => {
+        selectObject.append("option").text(name)
+    });
+}
 
 function buildMetadata(sampleNumber){
     d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json")
@@ -50,6 +58,8 @@ function buildMetadata(sampleNumber){
 const main = async () => {
     const data = await d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json");
     console.log('data', data);
+
+    fillSelect(data);
 };
 
 main()
