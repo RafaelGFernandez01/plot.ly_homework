@@ -34,10 +34,11 @@
 function fillSelect(data) {
     const names = data.names;
     const selectObject = d3.select("#selDataset");
+    selectObject.html("");
     console.log(names,selectObject);
 
     names.forEach((name) => {
-        selectObject.append("option").text(name)
+        selectObject.append("option").text(name);
     });
 }
 
@@ -63,9 +64,7 @@ const main = async () => {
 };
 
 main()
-    .then(() => {
-        console.log('finish main')
-    });
+
 
 
 
