@@ -42,10 +42,10 @@ function fillSelect(data) {
     });
 }
 
-function optionChanged(value){
-    console.log(value);  
-    buildMetadata(value);
-}
+// function optionChanged(value){
+//     console.log(value);  
+//     buildMetadata(value);
+// }
 
 
 function buildMetadata(data, sampleNumber){
@@ -54,7 +54,7 @@ function buildMetadata(data, sampleNumber){
     let metadata_obj = d3.select("#sample-metadata");
     metadata_obj.html("")
 
-    console.log('data', data);
+    console.log('metadata', metadata);
 
 }
 // buildMetadata();
@@ -64,6 +64,11 @@ const main = async () => {
     console.log('data', data);
 
     fillSelect(data);
+    d3.select('#selDataset')
+        .on('change', () => {
+            const name = this.value;
+            buildMetadata(data, name);
+        });
 };
 
 main()
