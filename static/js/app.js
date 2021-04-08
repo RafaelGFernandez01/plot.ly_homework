@@ -57,9 +57,18 @@ function buildCharts(sampleNumber){
     }
 Plotly.newPlot("bar",[barTrace]);
 
+
+
+
     })}
 
-buildChart     
+//init function :
+//populate the drop down menu (id=selDataset)
+//loop though data and append an option for each sample name
+//call buildChart and buildMetadata on the first value in samples.json
+//Google buble chart and follow information given 
+
+//optionChange: call buildChart and builddMetada on the new sample
 
 
 
