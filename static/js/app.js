@@ -39,12 +39,28 @@ d3.json("./samples.json").then((data) => {
 
 //   ![bar Chart](Images/hw01.png)
 function buildCharts(sampleNumber){
-    d3.json("samples.json").then((data) => {
-    samples = data.samples;
-    var sample = samples[0]
-    var otu_ids = sample.otu_ids
-    var otu_labels = sample.otu_labels
-    var sample_values = sample.sample_values
+        d3.json("samples.json").then((data) => {
+        samples = data.samples;
+        var sample = samples[0]
+        var otu_ids = sample.otu_ids
+        var otu_labels = sample.otu_labels
+        var sample_values = sample.sample_values
+
+    barTrace = {
+        y: otu_ids.slice(0-10).map(otu => `OTU ${otu}`).reverse(),
+        x: sample_values.slice(0,10).reverse(),
+        type: "bar",
+        text: otu_labels.slice(0,10).reverse(),
+        orientation: "h"
+    
+
+    }
+Plotly.newPlot("bar",[barTrace]);
+
+    })}
+
+buildChart     
+
 
 
 
