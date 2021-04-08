@@ -16,18 +16,31 @@
 
 // Homework Review 4/21/2021   
 
-function builtMetadata(sampleNumber){
-d3.json("./samples.json").then((data) => {
-   metadata = data.metadata;
-   metadata = filter(metadata => metadata.id == sampleNumber)
-   var_metadata_obj = d3.select("#sample-metadata");
-   metadata_object.html("")
-   Object.entries(sample).forEach({key, value}) => {
-        metadata_object.append("h6").text(`${key.toUpperCase}: ${value}`
+// function builtMetadata(sampleNumber){
+// d3.json("./samples.json").then((data) => {
+//    metadata = data.metadata;
+//    metadata = filter(metadata => metadata.id == sampleNumber)
+//    var_metadata_obj = d3.select("#sample-metadata");
+//    metadata_object.html("")
+//    Object.entries(sample).forEach(({key, value}) => {
+//         metadata_object.append("h6").text(`${key.toUpperCase}: ${value}`
+//    });
+// })
+// }
+
+function buildMetadata(sampleNumber){
+    d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/samples.json")
+        .then((data) =>{
+            console.log('data', data);
+        });
+
+}
+buildMetadata();
         
-   })
-          
-})
+
+
+
+
 
 // 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
 
@@ -38,29 +51,29 @@ d3.json("./samples.json").then((data) => {
 // * Use `otu_labels` as the hovertext for the chart.
 
 //   ![bar Chart](Images/hw01.png)
-function buildCharts(sampleNumber){
-        d3.json("samples.json").then((data) => {
-        samples = data.samples;
-        var sample = samples[0]
-        var otu_ids = sample.otu_ids;
-        var otu_labels = sample.otu_labels;
-        var sample_values = sample.sample_values;
+// function buildCharts(sampleNumber){
+//         d3.json("samples.json").then((data) => {
+//         samples = data.samples;
+//         var sample = samples[0]
+//         var otu_ids = sample.otu_ids;
+//         var otu_labels = sample.otu_labels;
+//         var sample_values = sample.sample_values;
 
-    barTrace = {
-        y: otu_ids.slice(0-10).map(otu => `OTU ${otu}`).reverse(),
-        x: sample_values.slice(0,10).reverse(),
-        type: "bar",
-        text: otu_labels.slice(0,10).reverse(),
-        orientation: "h"
+//     barTrace = {
+//         y: otu_ids.slice(0-10).map(otu => `OTU ${otu}`).reverse(),
+//         x: sample_values.slice(0,10).reverse(),
+//         type: "bar",
+//         text: otu_labels.slice(0,10).reverse(),
+//         orientation: "h"
     
 
-    }
-Plotly.newPlot("bar",[barTrace]);
+//     }
+// Plotly.newPlot("bar",[barTrace]);
 
 
 
 
-    })}
+//     })}
 
 //init function :
 //populate the drop down menu (id=selDataset)
@@ -74,13 +87,13 @@ Plotly.newPlot("bar",[barTrace]);
 
 
 
-    }
+    // }
 
 
 
 
 
-}
+// }
 
 
 
