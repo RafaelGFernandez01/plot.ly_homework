@@ -87,28 +87,26 @@ main()
 
 //   ![bar Chart](Images/hw01.png)
 // function buildCharts(sampleNumber){
-//         d3.json("samples.json").then((data) => {
-//         samples = data.samples;
-//         var sample = samples[0]
-//         var otu_ids = sample.otu_ids;
-//         var otu_labels = sample.otu_labels;
-//         var sample_values = sample.sample_values;
+        d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json").then((data) => {
+        samples = data.samples;
+        var sample = samples[0]
+        var otu_ids = sample.otu_ids;
+        var otu_labels = sample.otu_labels;
+        var sample_values = sample.sample_values;
 
-//     barTrace = {
-//         y: otu_ids.slice(0-10).map(otu => `OTU ${otu}`).reverse(),
-//         x: sample_values.slice(0,10).reverse(),
-//         type: "bar",
-//         text: otu_labels.slice(0,10).reverse(),
-//         orientation: "h"
+    barTrace = {
+        y: otu_ids.slice(0-10).map(otu => `OTU ${otu}`).reverse(),
+        x: sample_values.slice(0,10).reverse(),
+        type: "bar",
+        text: otu_labels.slice(0,10).reverse(),
+        orientation: "h"
     
 
-//     }
-// Plotly.newPlot("bar",[barTrace]);
+    }
+Plotly.newPlot("bar",[barTrace]);
 
+})
 
-
-
-//     })}
 
 //init function :
 //populate the drop down menu (id=selDataset)
@@ -187,4 +185,4 @@ main()
 
 // * Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
 
-// * Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
+// * Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md.
