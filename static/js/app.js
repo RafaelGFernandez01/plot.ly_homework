@@ -28,16 +28,34 @@
 // })
 // }
 
+
+
+
+
+
 function buildMetadata(sampleNumber){
-    d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/samples.json")
+    d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json")
         .then((data) =>{
+            let metadata = data.metadata;    
+            metadata = metadata.filter(m => m.id == sampleNumber);
+            let metadata_obj = d3.select("#sample-metadata");
+            metadata_obj.html("")
+
             console.log('data', data);
         });
 
 }
-buildMetadata();
+// buildMetadata();
         
+const main = async () => {
+    const data = await d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json");
+    console.log('data', data);
+};
 
+main()
+    .then(() => {
+        console.log('finish main')
+    });
 
 
 
