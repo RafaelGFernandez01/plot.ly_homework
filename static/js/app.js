@@ -29,7 +29,7 @@
 // }
 
 
-
+// 1. Use the D3 library to read in `samples.json`.
 
 function fillSelect(data) {
     const names = data.names;
@@ -47,6 +47,7 @@ function fillSelect(data) {
 //     buildMetadata(value);
 // }
 
+// buildMetadata();
 
 function buildMetadata(data, sampleNumber){
     let metadata = data.metadata;    
@@ -57,8 +58,8 @@ function buildMetadata(data, sampleNumber){
     console.log('metadata', metadata);
 
 }
-// buildMetadata();
-        
+
+       
 const main = async () => {
     const data = await d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json");
     console.log('data', data);
@@ -73,20 +74,13 @@ const main = async () => {
 
 main()
 
-
-
-
-
 // 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
-
 // * Use `sample_values` as the values for the bar chart.
-
 // * Use `otu_ids` as the labels for the bar chart.
-
 // * Use `otu_labels` as the hovertext for the chart.
-
 //   ![bar Chart](Images/hw01.png)
-// function buildCharts(sampleNumber){
+// function buildCharts(sampleNumber)
+
         d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json").then((data) => {
         samples = data.samples;
         var sample = samples[0]
