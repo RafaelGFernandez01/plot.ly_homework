@@ -53,6 +53,10 @@ function renderBubbleChart(data){
     Plotly.newPlot("bubble",[bubbleTrace],layout);
 }
 
+function displaySampleMetadata(data){
+    // CODE HERE...
+}
+
 const main = async () => {
     const data = await d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json");
     console.log('data', data);
@@ -63,6 +67,8 @@ const main = async () => {
     renderBarChart(data);
     // 3...
     renderBubbleChart(data);
+    // 4-) Display the sample metadata
+    // displaySampleMetadata(data);
 
     // register handlers
     d3.select('#selDataset')
