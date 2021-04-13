@@ -74,6 +74,7 @@ const main = async () => {
 
 main()
 
+
 // 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
 // * Use `sample_values` as the values for the bar chart.
 // * Use `otu_ids` as the labels for the bar chart.
@@ -127,15 +128,6 @@ Plotly.newPlot("bar",[barTrace]);
 // console.log(importedData);
     
 
-// 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
-
-// * Use `sample_values` as the values for the bar chart.
-
-// * Use `otu_ids` as the labels for the bar chart.
-
-// * Use `otu_labels` as the hovertext for the chart.
-
-//   ![bar Chart](Images/hw01.png)
 
 // 3. Create a bubble chart that displays each sample.
 
@@ -151,7 +143,43 @@ Plotly.newPlot("bar",[barTrace]);
 
 // ![Bubble Chart](Images/bubble_chart.png)
 
+d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json").then((data) => {
+    samples = data.samples;
+    var sample = samples[0]
+    var otu_ids = sample.otu_ids;
+    var otu_labels = sample.otu_labels;
+    var sample_values = sample.sample_values;
+   
+
+bubbleTrace = {
+    x: otu_ids,
+    y: sample_values,
+    mode: 'markers',
+    marker: {
+        size: sample_values
+    },
+    
+}
+
+  var layout = {
+    title: 'Belly Button Biodiversity',
+    
+  };
+
+Plotly.newPlot("bubble",[bubbleTrace],layout);
+
+console.log(bubbleTrace)
+
+})
+
+
 // 4. Display the sample metadata, i.e., an individual's demographic information.
+
+
+
+
+
+
 
 // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
 
