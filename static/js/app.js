@@ -53,7 +53,8 @@ function renderBubbleChart(data){
         y: sample_values,
         mode: 'markers',
         marker: {
-            size: sample_values
+            size: sample_values,
+            color: 'rgb(38,230,0)'
         },
     }
     var layout = {
