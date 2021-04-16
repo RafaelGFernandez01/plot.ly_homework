@@ -4,15 +4,23 @@ function fillSelect(data) {
     selectObject.html("");
     
     names.forEach((name) => {
-        selectObject.append("option").text(name);
+        selectObject.append("option").attr("value", name).text(name);
     });
 }
 
 function buildMetadata(data, sampleNumber){
-    let metadata = data.metadata;    
-    metadata = metadata.filter(m => m.id == sampleNumber);
+    const [metadata] = data.metadata.filter(m => m.id == sampleNumber);
     let metadata_obj = d3.select("#sample-metadata");
-    metadata_obj.html("");
+    metadata_obj.html(`
+        <p><strong>ID:</strong> ${metadata.id}</p>
+        <p><strong>Ethnicity:</strong> ${metadata.ethnicity}</p>
+        <p><strong>Gender:</strong> ${metadata.gender}</p>
+        <p><strong>Age:</strong> ${metadata.age}</p>
+        <p><strong>Location:</strong> ${metadata.location}</p>
+        <p><strong>BB Type:</strong> ${metadata.bbtype}</p>
+        <p><strong>WFREQ:</strong> ${metadata.wfreq}</p>
+    `);
+    console.log(metadata);
 }
 
 function renderBarChart(data){
@@ -26,7 +34,7 @@ function renderBarChart(data){
         y: otu_ids.slice(0-10).map(otu => `OTU ${otu}`).reverse(),
         x: sample_values.slice(0,10).reverse(),
         marker: {
-            color: 'rgb(142,124,195)'},
+            color: 'rgb(38,230,0)'},
         type: "bar",
         text: otu_labels.slice(0,10).reverse(),
         orientation: "h"
@@ -61,6 +69,7 @@ function renderBubbleChart(data){
 // }
     
 var _data;
+var _selectedMetadata;
 
 async function getData() {
     if (_data) {
@@ -96,8 +105,8 @@ const render = async () => {
     // register handlers
     d3.select('#selDataset')
         .on('change', () => {
-            const name = this.value;
-            buildMetadata(data, name);
+            _selectedMetadata = d3.select("#selDataset").property("value");
+            buildMetadata(data, _selectedMetadata);
         });
 };
 
