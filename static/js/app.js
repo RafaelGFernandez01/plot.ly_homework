@@ -25,6 +25,8 @@ function renderBarChart(data){
     barTrace = {
         y: otu_ids.slice(0-10).map(otu => `OTU ${otu}`).reverse(),
         x: sample_values.slice(0,10).reverse(),
+        marker: {
+            color: 'rgb(142,124,195)'},
         type: "bar",
         text: otu_labels.slice(0,10).reverse(),
         orientation: "h"
@@ -53,12 +55,24 @@ function renderBubbleChart(data){
     Plotly.newPlot("bubble",[bubbleTrace],layout);
 }
 
-function displaySampleMetadata(data){
-    // CODE HERE...
+// function displaySampleMetadata(data){
+
+//      console.log(sampleMetadata)
+// }
+    
+var _data;
+
+async function getData() {
+    if (_data) {
+        return _data;
+    } else {
+        _data = await d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json");
+        return _data;
+    }
 }
 
-const main = async () => {
-    const data = await d3.json("https://raw.githubusercontent.com/RafaelGFernandez01/plot.ly_homework/main/static/data/samples.json");
+const render = async () => {
+    const data = await getData();
     console.log('data', data);
 
     // 1...
@@ -70,6 +84,15 @@ const main = async () => {
     // 4-) Display the sample metadata
     // displaySampleMetadata(data);
 
+
+
+
+    // 5-)Display each key-value pair from the metadata JSON object somewhere on the page
+    // 6-)Update all of the plots any time that a new sample is selected
+    // 7-)Adapt the Gauge Chart
+    // renderGaugeChart(data);
+    
+
     // register handlers
     d3.select('#selDataset')
         .on('change', () => {
@@ -78,4 +101,4 @@ const main = async () => {
         });
 };
 
-main()
+render()
