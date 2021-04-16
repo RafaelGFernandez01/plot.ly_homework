@@ -6,10 +6,12 @@ function fillSelect(data) {
     names.forEach((name) => {
         selectObject.append("option").attr("value", name).text(name);
     });
+
+    _selectedMetadata = d3.select("#selDataset").property("value");
 }
 
-function buildMetadata(data, sampleNumber){
-    const [metadata] = data.metadata.filter(m => m.id == sampleNumber);
+function buildMetadata(data){
+    const [metadata] = data.metadata.filter(m => m.id == _selectedMetadata);
     let metadata_obj = d3.select("#sample-metadata");
     metadata_obj.html(`
         <p><strong>ID:</strong> ${metadata.id}</p>
@@ -20,12 +22,12 @@ function buildMetadata(data, sampleNumber){
         <p><strong>BB Type:</strong> ${metadata.bbtype}</p>
         <p><strong>WFREQ:</strong> ${metadata.wfreq}</p>
     `);
-    console.log(metadata);
 }
 
-function renderBarChart(data){
+function renderBarChart(data) {
     const samples = data.samples;
-    const sample = samples[0];
+    // const sample = samples[0];
+    const [sample] = data.samples.filter(s => s.id == _selectedMetadata);
     const otu_ids = sample.otu_ids;
     const otu_labels = sample.otu_labels;
     const sample_values = sample.sample_values;
@@ -44,7 +46,7 @@ function renderBarChart(data){
 
 function renderBubbleChart(data){
     const samples = data.samples;
-    const sample = samples[0]
+    const [sample] = data.samples.filter(s => s.id == _selectedMetadata);
     const otu_ids = sample.otu_ids;
     const sample_values = sample.sample_values;
    
@@ -64,11 +66,29 @@ function renderBubbleChart(data){
     Plotly.newPlot("bubble",[bubbleTrace],layout);
 }
 
-// function displaySampleMetadata(data){
-
-//      console.log(sampleMetadata)
-// }
+function renderGaugeChart(data){
+    const [metadata] = data.metadata.filter(m => m.id == _selectedMetadata);
     
+    const trace = [
+        {
+            domain: { x: [0, 1], y: [0, 1] },
+            value: metadata.wfreq,
+            title: { text: "Speed" },
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                axis:{ range: [0, 9] },                
+            }
+            
+        }
+    ];
+    
+    var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+    Plotly.newPlot('gauge', trace, layout);
+
+
+}
+
 var _data;
 var _selectedMetadata;
 
@@ -85,22 +105,11 @@ const render = async () => {
     const data = await getData();
     console.log('data', data);
 
-    // 1...
     fillSelect(data);
-    // 2...
     renderBarChart(data);
-    // 3...
     renderBubbleChart(data);
-    // 4-) Display the sample metadata
-    // displaySampleMetadata(data);
-
-
-
-
-    // 5-)Display each key-value pair from the metadata JSON object somewhere on the page
-    // 6-)Update all of the plots any time that a new sample is selected
-    // 7-)Adapt the Gauge Chart
-    // renderGaugeChart(data);
+    buildMetadata(data);
+    renderGaugeChart(data);
     
 
     // register handlers
@@ -108,6 +117,9 @@ const render = async () => {
         .on('change', () => {
             _selectedMetadata = d3.select("#selDataset").property("value");
             buildMetadata(data, _selectedMetadata);
+            renderBarChart(data);
+            renderBubbleChart(data);
+            renderGaugeChart(data);
         });
 };
 
